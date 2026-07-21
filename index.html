@@ -189,6 +189,12 @@
     padding:24px; display:flex; flex-direction:column; transition:border-color .2s ease, transform .2s ease;
   }
   .proj-card:hover{border-color:var(--accent); transform:translateY(-3px);}
+  .proj-status{
+    display:inline-block; font-family:var(--mono); font-size:10.5px; font-weight:600;
+    color:var(--accent-2); border:1px solid var(--accent-2); border-radius:20px;
+    padding:3px 10px; margin-bottom:14px; letter-spacing:.3px;
+    background:rgba(245,166,35,0.08);
+  }
   .proj-metric{
     font-family:var(--display); font-size:26px; font-weight:700; color:var(--accent); margin-bottom:6px;
   }
@@ -415,6 +421,7 @@
         <a class="proj-link" href="https://github.com/yojasree/rag-document-qa" target="_blank" rel="noopener">View on GitHub →</a>
       </div>
       <div class="proj-card reveal">
+        <div class="proj-status">In progress · building</div>
         <div class="proj-metric">93–95%</div>
         <div class="proj-metric-label">Classification Accuracy</div>
         <h3>Sentiment Classification (DistilBERT)</h3>
@@ -423,6 +430,7 @@
         <span class="proj-link" style="color:var(--text-dim)">Private repo</span>
       </div>
       <div class="proj-card reveal">
+        <div class="proj-status">In progress · planned</div>
         <div class="proj-metric">20%</div>
         <div class="proj-metric-label">Reliability Improvement</div>
         <h3>Customer/Sales Data Dashboard</h3>
@@ -456,8 +464,9 @@
   <div class="wrap">
     <div class="sec-head"><span class="sec-num">06 /</span><span class="sec-title">Resume</span></div>
     <div class="contact-box reveal">
-      <h2>Get the full picture.</h2>
-      <p>Download or view my resume for the complete rundown of my experience, skills, and education.</p>
+      <h2>The short version, on one page.</h2>
+      <p style="font-family:var(--mono); font-size:13px; color:var(--accent-2); margin-bottom:14px;">Data Analyst · Applied AI &amp; RAG Systems · SQL · Python · Tableau</p>
+      <p>Data Analyst and IT graduate student with over one year of hands-on experience in data cleaning, transformation, and exploratory analysis using SQL, Python, and Excel. Hands-on experience building LLM-powered applications, including retrieval-augmented generation (RAG) pipelines, vector search, and prompt-engineered solutions. Seeking Data Analyst, AI/ML Intern, or Applied AI opportunities.</p>
       <div class="contact-links">
         <a class="btn primary" href="Yojasree_Palicherla_Resume.pdf" download>Download Resume ↓</a>
         <a class="btn ghost" href="Yojasree_Palicherla_Resume.pdf" target="_blank" rel="noopener">View Resume ↗</a>
