@@ -184,6 +184,27 @@
 
   /* PROJECTS */
   .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .proj-list{display:flex; flex-direction:column;}
+  .proj-row{
+    display:grid; grid-template-columns:1fr 250px; gap:36px;
+    padding:36px 0; border-bottom:1px solid var(--line);
+  }
+  .proj-row:first-child{padding-top:0;}
+  @media (max-width:820px){ .proj-row{grid-template-columns:1fr;} }
+  .proj-pipeline{border-left:1px solid var(--line); padding-left:24px;}
+  @media (max-width:820px){
+    .proj-pipeline{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:20px; margin-top:4px;}
+  }
+  .proj-pipeline .pp-label{
+    font-family:var(--mono); font-size:10.5px; color:var(--text-dim); text-transform:uppercase;
+    letter-spacing:.6px; margin-bottom:16px;
+  }
+  .pp-step{display:flex; gap:10px; margin-bottom:16px;}
+  .pp-step:last-child{margin-bottom:0;}
+  .pp-step .pp-n{font-family:var(--mono); font-size:11px; color:var(--accent); flex-shrink:0; padding-top:1px;}
+  .pp-step .pp-txt b{display:block; font-family:var(--display); font-size:13px; color:var(--text); margin-bottom:2px; font-weight:600;}
+  .pp-step .pp-txt span{display:block; font-size:11.5px; color:var(--text-dim); line-height:1.4;}
+  .pp-step.pp-planned .pp-n, .pp-step.pp-planned .pp-txt b{color:var(--text-dim);}
   .proj-card{
     background:var(--bg-elev); border:1px solid var(--line); border-radius:4px;
     padding:24px; display:flex; flex-direction:column; transition:border-color .2s ease, transform .2s ease;
@@ -202,6 +223,21 @@
   .proj-card h3{font-family:var(--display); font-size:17px; margin-bottom:10px;}
   .proj-card p{font-size:13.5px; color:var(--text-dim); flex-grow:1; margin-bottom:16px;}
   .proj-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;}
+  .proj-sub{font-family:var(--mono); font-size:12px; color:var(--accent-2); margin-bottom:14px;}
+  .proj-block{margin-bottom:18px;}
+  .proj-block h4{font-family:var(--mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px;}
+  .proj-block ul{margin:0; padding-left:0; list-style:none;}
+  .proj-block ul li{
+    font-size:13px; color:var(--text-dim); margin-bottom:7px; padding-left:16px; position:relative;
+  }
+  .proj-block ul li::before{content:'—'; position:absolute; left:0; color:var(--accent);}
+  .proj-block.planned ul li::before{color:var(--text-dim);}
+  .proj-block.planned ul li{color:var(--text-dim);}
+  .proj-learned{
+    font-size:13px; color:var(--text-dim); border-left:2px solid var(--accent);
+    padding-left:14px; margin-bottom:18px; line-height:1.6;
+  }
+  .proj-learned b{color:var(--text);}
   .proj-tags span{font-family:var(--mono); font-size:10.5px; color:var(--accent-2); border:1px solid var(--line); padding:3px 7px; border-radius:2px;}
   .proj-link{font-family:var(--mono); font-size:12.5px; color:var(--accent);}
   .proj-link:hover{text-decoration:underline;}
@@ -411,33 +447,141 @@
 <section id="projects">
   <div class="wrap">
     <div class="sec-head"><span class="sec-num">04 /</span><span class="sec-title">Projects</span></div>
-    <div class="proj-grid">
-      <div class="proj-card reveal">
-        <div class="proj-metric">100%</div>
-        <div class="proj-metric-label">Eval Set Accuracy</div>
-        <h3>AI-Powered Document Q&amp;A (RAG)</h3>
-        <p>Retrieval-augmented pipeline answering questions over a document corpus — chunking, embeddings, and a vector DB, deployed as a Streamlit demo with sourced answers.</p>
-        <div class="proj-tags"><span>RAG</span><span>FAISS/Chroma</span><span>Streamlit</span></div>
-        <a class="proj-link" href="https://github.com/yojasree/rag-document-qa" target="_blank" rel="noopener">View on GitHub →</a>
+    <div class="proj-list">
+
+      <div class="proj-row">
+        <div class="proj-card reveal">
+          <div class="proj-metric">100%</div>
+          <div class="proj-metric-label">Eval Set Accuracy</div>
+          <h3>AI-Powered Document Q&amp;A (RAG)</h3>
+          <div class="proj-sub">Document Q&amp;A · Retrieval-Augmented Generation Pipeline</div>
+          <p>Retrieval-augmented pipeline answering questions over a document corpus — chunking, embeddings, and a vector DB, deployed as a Streamlit demo with sourced answers.</p>
+
+          <div class="proj-block">
+            <h4>What I've built</h4>
+            <ul>
+              <li>Document ingestion &amp; chunking (LangChain, ~800-char chunks with overlap)</li>
+              <li>Embedding generation (Sentence-Transformers) into a ChromaDB vector store</li>
+              <li>Semantic retrieval via top-k similarity search</li>
+              <li>Grounded generation (OpenAI API) with context-constrained prompting</li>
+              <li>Custom evaluation harness with keyword-based scoring</li>
+              <li>Streamlit demo interface for natural-language querying</li>
+            </ul>
+          </div>
+
+          <div class="proj-learned">
+            <b>Retrieval quality is the real bottleneck</b> — even a strong LLM gives a weak answer if it's handed the wrong chunks. Constraining the prompt to only answer from retrieved context reduced hallucination more than model choice did. And building a real evaluation harness turned "seems good" into an actual number.
+          </div>
+
+          <div class="proj-block planned">
+            <h4>Planned next</h4>
+            <ul>
+              <li>Semantic similarity scoring, beyond keyword matching</li>
+              <li>Testing against larger, more diverse document sets</li>
+              <li>Conversation memory for follow-up questions</li>
+            </ul>
+          </div>
+
+          <div class="proj-tags"><span>RAG</span><span>FAISS/Chroma</span><span>Streamlit</span></div>
+          <a class="proj-link" href="https://github.com/yojasree/rag-document-qa" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <div class="proj-pipeline reveal">
+          <div class="pp-label">// pipeline</div>
+          <div class="pp-step"><span class="pp-n">01</span><div class="pp-txt"><b>ingest</b><span>chunk PDF, ~800 chars</span></div></div>
+          <div class="pp-step"><span class="pp-n">02</span><div class="pp-txt"><b>embed + store</b><span>Sentence-Transformers → ChromaDB</span></div></div>
+          <div class="pp-step"><span class="pp-n">03</span><div class="pp-txt"><b>retrieve</b><span>top-k semantic search</span></div></div>
+          <div class="pp-step"><span class="pp-n">04</span><div class="pp-txt"><b>generate + eval</b><span>grounded prompt, scored</span></div></div>
+        </div>
       </div>
-      <div class="proj-card reveal">
-        <div class="proj-status">In progress · building</div>
-        <div class="proj-metric">93–95%</div>
-        <div class="proj-metric-label">Classification Accuracy</div>
-        <h3>Sentiment Classification (DistilBERT)</h3>
-        <p>Fine-tuned a pretrained DistilBERT transformer on 50,000 IMDb reviews, with tokenization, transfer learning, and evaluation across balanced and imbalanced splits.</p>
-        <div class="proj-tags"><span>PyTorch</span><span>Hugging Face</span><span>NLP</span></div>
-        <span class="proj-link" style="color:var(--text-dim)">Private repo</span>
+
+      <div class="proj-row">
+        <div class="proj-card reveal">
+          <div class="proj-status">In progress · building</div>
+          <div class="proj-metric">93–95%</div>
+          <div class="proj-metric-label">Classification Accuracy</div>
+          <h3>Sentiment Classification (DistilBERT)</h3>
+          <div class="proj-sub">Sentiment Classification · Fine-Tuned Transformer (NLP)</div>
+          <p>Fine-tuned a pretrained DistilBERT transformer on 50,000 IMDb reviews, with tokenization, transfer learning, and evaluation across balanced and imbalanced splits.</p>
+
+          <div class="proj-block">
+            <h4>What I've built</h4>
+            <ul>
+              <li>Fine-tuned DistilBERT (PyTorch, Hugging Face) on 50,000 IMDb reviews</li>
+              <li>Tokenization &amp; preprocessing with padding/truncation for variable-length text</li>
+              <li>Transfer learning + hyperparameter tuning to cut training time</li>
+              <li>Evaluation via accuracy, precision, recall, and F1-score</li>
+            </ul>
+          </div>
+
+          <div class="proj-learned">
+            <b>Transfer learning meaningfully cuts training time without sacrificing accuracy</b> — fine-tuning a pretrained model reached 93–95% accuracy far faster than training a model from scratch would have.
+          </div>
+
+          <div class="proj-block planned">
+            <h4>Planned next</h4>
+            <ul>
+              <li>Expand to multi-class sentiment, beyond binary</li>
+              <li>Compare against a larger transformer baseline</li>
+              <li>Deploy as a lightweight API demo</li>
+            </ul>
+          </div>
+
+          <div class="proj-tags"><span>PyTorch</span><span>Hugging Face</span><span>NLP</span></div>
+          <span class="proj-link" style="color:var(--text-dim)">Private repo</span>
+        </div>
+        <div class="proj-pipeline reveal">
+          <div class="pp-label">// pipeline</div>
+          <div class="pp-step"><span class="pp-n">01</span><div class="pp-txt"><b>tokenize</b><span>HF tokenizer, pad/truncate</span></div></div>
+          <div class="pp-step"><span class="pp-n">02</span><div class="pp-txt"><b>fine-tune</b><span>PyTorch, transfer learning</span></div></div>
+          <div class="pp-step"><span class="pp-n">03</span><div class="pp-txt"><b>evaluate</b><span>accuracy, precision/recall, F1</span></div></div>
+          <div class="pp-step pp-planned"><span class="pp-n">04</span><div class="pp-txt"><b>multi-class</b><span>planned expansion</span></div></div>
+        </div>
       </div>
-      <div class="proj-card reveal">
-        <div class="proj-status">In progress · planned</div>
-        <div class="proj-metric">20%</div>
-        <div class="proj-metric-label">Reliability Improvement</div>
-        <h3>Customer/Sales Data Dashboard</h3>
-        <p>Cleaned and audited 50K+ e-commerce transactions, surfacing a 15% churn gap between paid-ad and organic customers via an interactive Tableau dashboard.</p>
-        <div class="proj-tags"><span>Python</span><span>SQL</span><span>Tableau</span></div>
-        <span class="proj-link" style="color:var(--text-dim)">Private repo</span>
+
+      <div class="proj-row">
+        <div class="proj-card reveal">
+          <div class="proj-status">In progress · planned</div>
+          <div class="proj-metric">20%</div>
+          <div class="proj-metric-label">Reliability Improvement</div>
+          <h3>Customer/Sales Data Dashboard</h3>
+          <div class="proj-sub">Customer/Sales Analytics · E-commerce Data Pipeline</div>
+          <p>Cleaned and audited 50K+ e-commerce transactions, surfacing a 15% churn gap between paid-ad and organic customers via an interactive Tableau dashboard.</p>
+
+          <div class="proj-block">
+            <h4>What I've built</h4>
+            <ul>
+              <li>Cleaned &amp; audited a 50K+ row transactions dataset (Python, SQL)</li>
+              <li>Churn analysis by acquisition channel (paid ads vs. organic)</li>
+              <li>Interactive Tableau dashboard for stakeholder exploration</li>
+              <li>Customer segmentation by behavior and value</li>
+            </ul>
+          </div>
+
+          <div class="proj-learned">
+            <b>Paid-acquisition channels can look great on volume while quietly costing more in retention</b> — the churn gap only became visible once acquisition channel was cross-tabbed against churn, not viewed in isolation.
+          </div>
+
+          <div class="proj-block planned">
+            <h4>Planned next</h4>
+            <ul>
+              <li>Add predictive churn scoring</li>
+              <li>Automate the data cleaning pipeline</li>
+              <li>Publish an interactive Tableau Public dashboard</li>
+            </ul>
+          </div>
+
+          <div class="proj-tags"><span>Python</span><span>SQL</span><span>Tableau</span></div>
+          <span class="proj-link" style="color:var(--text-dim)">Private repo</span>
+        </div>
+        <div class="proj-pipeline reveal">
+          <div class="pp-label">// pipeline</div>
+          <div class="pp-step"><span class="pp-n">01</span><div class="pp-txt"><b>extract</b><span>50K+ raw transactions</span></div></div>
+          <div class="pp-step"><span class="pp-n">02</span><div class="pp-txt"><b>clean</b><span>Python/SQL, dedup + nulls</span></div></div>
+          <div class="pp-step"><span class="pp-n">03</span><div class="pp-txt"><b>analyze</b><span>churn, segmentation</span></div></div>
+          <div class="pp-step pp-planned"><span class="pp-n">04</span><div class="pp-txt"><b>visualize</b><span>planned: Tableau dashboard</span></div></div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
